@@ -34,12 +34,11 @@
         <c:choose>
             <c:when test="${not empty sessionScope.user}">
                 <a class="nav-link" href="/controller?command=/" role="button">На главную</a>
-
-                   <a class="nav-link" href="/controller?command=createRequest" role="button">Оставить заявку на ремонт</a>
-                    <a class="nav-link" href="/controller?command=createRequest1" role="button">Посмотреть оставленные заявки</a>
-                    <a class="nav-link" href="/controller?command=createRequest2" role="button">Посмотреть подтвержденные заявки</a>
-
-
+                <a class="nav-link" href="/controller?command=cab" role="button">Личный кабинет</a>
+                <a class="nav-link" href="/controller?command=chats" role="button">Мои чаты</a>
+                <a class="nav-link" href="/controller?command=findChat" role="button">Найти чат</a>
+                <a class="nav-link" href="/controller?command=createChat" role="button">Cоздать чат</a>
+                <a class="nav-link" href="/controller?command=otz" role="button">Отзывы</a>
                 <a class="btn btn-primary" href="/controller?command=logout" role="button">Выйти</a>
             </c:when>
             <c:otherwise>

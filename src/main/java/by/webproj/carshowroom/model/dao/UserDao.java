@@ -12,4 +12,6 @@ public interface UserDao {
    Optional<User> findUserByLogin(String login) throws DaoException;
 
    List<User> findAllClients() throws DaoException;
+
+   boolean updateUserLoginAndNickName(Long id, String login, String nick) throws DaoException;
 }

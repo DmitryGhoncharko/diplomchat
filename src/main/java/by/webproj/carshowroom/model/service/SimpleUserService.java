@@ -27,16 +27,26 @@ public class SimpleUserService implements UserService {
     }
 
     @Override
-    public User addUserAsAdmin(String login, String password, String secretKey) {
+    public boolean updateUserLoginAndNickName(Long id, String login, String nick) {
+        try {
+            return userDao.updateUserLoginAndNickName(id,login,nick);
+        } catch (DaoException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @Override
+    public User addUserAsAdmin(String login, String password, String secretKey, String nickName) {
         if (!userValidator.validateUserDataByLoginAndPasswordWithSecretKey(login, password, secretKey)) {
             throw new ServiceError("Invalid user data, userPassword: " + login + " userLogin: " + password + " secretKey: " + secretKey);
         }
         try {
             final String hashedPassword = passwordHasher.hashPassword(password);
-            final User user = new User.Builder().
-                    withUserLogin(login).
-                    withUserPassword(hashedPassword).
-                    withUserRole(Role.ADMIN).
+            final User user = User.builder().
+                    login(login).
+                    password(hashedPassword).
+                    userRole(Role.ADMIN).
+                    nickName(nickName).
                     build();
 
             return userDao.addUser(user);
@@ -47,16 +57,17 @@ public class SimpleUserService implements UserService {
     }
 
     @Override
-    public boolean addUserAsClient(String login, String password) {
+    public boolean addUserAsClient(String login, String password, String nickName) {
         if (!userValidator.validateUserDataByLoginAndPassword(login, password)) {
             return false;
         }
         try {
             final String hashedPassword = passwordHasher.hashPassword(password);
-            final User user = new User.Builder().
-                    withUserLogin(login).
-                    withUserPassword(hashedPassword).
-                    withUserRole(Role.CLIENT).
+            final User user = User.builder().
+                    login(login).
+                    password(hashedPassword).
+                    userRole(Role.CLIENT).
+                    nickName(nickName).
                     build();
             userDao.addUser(user);
         } catch (DaoException e) {
@@ -89,7 +100,7 @@ public class SimpleUserService implements UserService {
     }
 
     @Override
-    public Optional<User> authenticateIfClient(String login, String password) {
+    public Optional<User> authenticateIfClient(String login, String password, String nickName) {
         if (!userValidator.validateUserDataByLoginAndPassword(login, password)) {
             return Optional.empty();
         }
@@ -117,6 +128,15 @@ public class SimpleUserService implements UserService {
         } catch (DaoException e) {
             LOG.error("Cannot find users as clients", e);
             throw new ServiceError("Cannot find users as clients", e);
+        }
+    }
+
+    @Override
+    public Optional<User> findUserByLogin(String login) {
+        try {
+            return userDao.findUserByLogin(login);
+        } catch (DaoException e) {
+            throw new ServiceError();
         }
     }
 }

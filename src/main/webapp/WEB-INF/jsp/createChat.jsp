@@ -1,4 +1,4 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="by.webproj.carshowroom.entity.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -42,7 +42,7 @@
 </style>
 <html>
 <head>
-  <title>Текущие оставленные заявки</title>
+  <title>Создать чат</title>
 </head>
 <body>
 <div class="container-fluid flex">
@@ -53,14 +53,15 @@
   </div>
   <div class="row h-100">
     <div class="col-md-12 h-100">
-     <c:forEach items="rep" var="request">
-        <p id="name">Название: ${request.name}</p>
-         <br>
-         <p>Описание: ${request.description}</p>
-         <br>
-         <p>Цена: ${request.cost}</p>
-         <br>
-     </c:forEach>
+      <form action="/controller?command=createChatt" method="post">
+        <label for="nm">Название чата</label>
+        <input type="text" id="nm" name="name">
+        <br>
+        <label for="ps">Укажите пароль если требуется</label>
+        <input type="password" id="ps" name="pass">
+        <br>
+        <button type="submit">Создать чат</button>
+      </form>
       <div class="row">
         <div class="col-md-12">
           <jsp:include page="footer.jsp"></jsp:include>

@@ -1,4 +1,4 @@
-
+<%@ page import="by.webproj.carshowroom.entity.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -42,7 +42,7 @@
 </style>
 <html>
 <head>
-    <title>Главная страница</title>
+    <title>Личный кабинет</title>
 </head>
 <body>
 <div class="container-fluid flex">
@@ -53,7 +53,25 @@
     </div>
     <div class="row h-100">
         <div class="col-md-12 h-100">
-          <img src="http://127.0.0.1:8000/1.jpeg" style="width: 100%">
+            <form action="/controller?command=updateUserData" method="post" enctype="multipart/form-data">
+                <input hidden="hidden" name="login" value="${sessionScope.user.login}">
+                <%
+                   User user = (User) request.getSession(false).getAttribute("user");
+                   out.print("<h6>Изображение пользователя: </h6>");
+                   out.print("<br/>");
+                   out.print(" <img src=\"http://127.0.0.1:8000/"+user.getId() +".png\" style=\"height: 100px\" width=\"100px\">");
+                    out.print("<br/>");
+                    out.print("<br/>");
+                   out.print("<label for=\"pass\">Ваш никнейм</label>");
+                   out.print("<input id=\"pass\" name=\"nick\" type=\"text\" value=\""+ user.getNickName() +"\">");
+                %>
+
+                <label for="data">Обновить картинку</label>
+                <br>
+                <input type="file" name="name" id="data">
+                <br>
+                <button type="submit">Обновить</button>
+            </form>
             <div class="row">
                 <div class="col-md-12">
                     <jsp:include page="footer.jsp"></jsp:include>

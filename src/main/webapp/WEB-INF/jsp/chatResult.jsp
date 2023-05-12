@@ -1,4 +1,6 @@
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="by.webproj.carshowroom.entity.User" %>
+<%@ page import="by.webproj.carshowroom.entity.Chat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -42,7 +44,7 @@
 </style>
 <html>
 <head>
-    <title>Главная страница</title>
+    <title>Найденные чаты</title>
 </head>
 <body>
 <div class="container-fluid flex">
@@ -53,7 +55,19 @@
     </div>
     <div class="row h-100">
         <div class="col-md-12 h-100">
-          <img src="http://127.0.0.1:8000/1.jpeg" style="width: 100%">
+            <c:choose>
+                <c:when test="${not empty requestScope.chat}">
+
+
+                        <form method="post" action="/controller?command=chatgett">
+                            <input hidden="hidden" name="name" value="${requestScope.chat.name}">
+                            <button type="submit">${requestScope.chat.name}</button>
+                        </form>
+                </c:when>
+                <c:otherwise>
+                    <h1>Такого чата не найдено</h1>
+                </c:otherwise>
+            </c:choose>
             <div class="row">
                 <div class="col-md-12">
                     <jsp:include page="footer.jsp"></jsp:include>

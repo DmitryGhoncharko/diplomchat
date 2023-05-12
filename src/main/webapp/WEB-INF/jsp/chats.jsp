@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="by.webproj.carshowroom.entity.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
       integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
@@ -42,7 +43,7 @@
 </style>
 <html>
 <head>
-  <title>Оставить заявку на ремонт</title>
+  <title>Мои чаты</title>
 </head>
 <body>
 <div class="container-fluid flex">
@@ -53,17 +54,13 @@
   </div>
   <div class="row h-100">
     <div class="col-md-12 h-100">
-      <c:forEach items="${requestScope.c}" var="request">
-
-          <p id="name">${request.name}</p>
-          <br>
-          <p id="desc">${request.description}</p>
-          <br>
-          <br>
-          <p>${request.cost}</p>
-          <br>
-          <br>
-
+      <c:forEach items="${requestScope.chats}" var="c">
+        <form method="post" action="/controller?command=chatget">
+          <input hidden="hidden" name="name" value="${c.name}">
+          <a href="/controller?command=delete&id=${c.id}">Удалить чат ${c.name}</a>
+          <button type="submit">${c.name}</button>
+        </form>
+        <br>
       </c:forEach>
       <div class="row">
         <div class="col-md-12">
