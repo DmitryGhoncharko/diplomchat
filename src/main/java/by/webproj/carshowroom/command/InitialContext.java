@@ -65,6 +65,8 @@ public class InitialContext {
                 return new SendMessageCommand(simpleRequestFactory,chatDao);
             case "addotz":
                 return new AddOtzCommand(simpleRequestFactory,otzDao);
+            case "delete":
+                return new DeleteChatCommand(simpleRequestFactory,chatDao);
             default:
                 return new ShowMainPageCommand(simpleRequestFactory);
         }
