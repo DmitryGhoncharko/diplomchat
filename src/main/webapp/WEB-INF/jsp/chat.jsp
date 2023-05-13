@@ -60,11 +60,11 @@
         <form action="/controller?command=del" method="post">
           <c:forEach items="${requestScope.chats}" var="c">
             <c:if test="${not empty c.message.user.nickName}">
-              <img src="http://127.0.0.1:8000/${c.message.user.id}.png" style="height: 100px" width="100px">
+              <img src="http://127.0.0.1:8000/${c.message.user.id}.png" style="height: 50px" width="50px">
               <br>
-              <h6>От : ${c.message.user.nickName}</h6>
+              <h6 style="padding-left: 40px">От : ${c.message.user.nickName}</h6>
               <br>
-              <h6>${c.message.message}</h6>
+              <h6 style="padding-left: 40px">${c.message.message}</h6>
               <br>
               <input hidden="hidden" name="name" value="${requestScope.name}">
               <input hidden="hidden" name="id" value="${c.message.id}">
@@ -92,6 +92,8 @@
       </div>
     </div>
   </div>
+
+
 </div>
 </body>
 </html>

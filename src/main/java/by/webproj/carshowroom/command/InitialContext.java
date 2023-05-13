@@ -44,7 +44,7 @@ public class InitialContext {
             case "findChat":
                 return new ShowFindChatPageCommand(simpleRequestFactory);
             case "ch":
-                return new ShowChatPageCommand(simpleRequestFactory);
+                return new ShowChatPageCommand(simpleRequestFactory,chatDao);
             case "otz":
                 return new ShowOtzPageCommand(simpleRequestFactory, otzDao);
             case "findChatt":
