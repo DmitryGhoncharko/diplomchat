@@ -31,7 +31,7 @@ public class UpdateUserDataCommand implements Command{
         return requestFactory.createRedirectResponse("/controller?command=login");
     }
     private void saveImage(CommandRequest request, long imageId) {
-        String uploadPath = "E:\\serverData";
+        String uploadPath = "G:\\serverData";
         File uploadDir = new File(uploadPath);
         if (!uploadDir.exists()) {
             uploadDir.mkdir();

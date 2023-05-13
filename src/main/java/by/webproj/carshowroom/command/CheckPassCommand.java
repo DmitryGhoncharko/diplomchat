@@ -26,6 +26,7 @@ public class CheckPassCommand implements Command{
             List<ChatDTO> chatDTOS = chatDao.getChatMessagesByName(name);
             request.addAttributeToJsp("chats",chatDTOS);
             request.addAttributeToJsp("id",chatDTOS.get(0).getChat().getId());
+            request.addAttributeToJsp("name",chatDTOS.get(0).getChat().getName());
             return requestFactory.createForwardResponse(PagePath.CHAT_PAGE.getPath());
         }else {
             return requestFactory.createForwardResponse(PagePath.INDEX_PATH.getPath());
